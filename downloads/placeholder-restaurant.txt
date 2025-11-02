@@ -1,0 +1,3 @@
+Ce fichier est un placeholder pour le projet Site Restaurant.
+Le projet est en cours de développement.
+Remplacez ce fichier par le fichier final quand il sera prêt.

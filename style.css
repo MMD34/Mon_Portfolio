@@ -246,12 +246,43 @@
             }
 
             img.portfolio{
-                width: 70%; 
+                width: 70%;
                 max-width: 475px;
             }
 
             .display-mobile{
                 display: none;
+            }
+
+            a.download-button{
+                color: white;
+                background-color: var(--color1);
+                border: 3px solid var(--color1);
+                padding: 12px 30px;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                font-weight: bold;
+                transition: all 0.3s ease;
+            }
+
+            a.download-button:hover{
+                background-color: #c57e6d;
+                border-color: #c57e6d;
+                transform: scale(1.05);
+            }
+
+            a.download-button.placeholder{
+                background-color: #999;
+                border-color: #999;
+                cursor: not-allowed;
+                opacity: 0.6;
+            }
+
+            a.download-button.placeholder:hover{
+                background-color: #999;
+                border-color: #999;
+                transform: none;
             }
 
             a.me-contacter-portfolio{
