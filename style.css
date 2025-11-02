@@ -182,12 +182,14 @@
                 background: url(triangle1white.svg) no-repeat center top/100%;
                 background-color: var(--color2);
                 padding-top: 80px;
+                text-align: center;
             }
 
             h2{
                 text-align: center;
                 font-size: 34px;
                 margin-top: 0px;
+                margin-bottom: 30px;
             }
 
             div.separateur{
@@ -210,12 +212,14 @@
 
             img.col-contenu{
                 width: 40%;
-
+                vertical-align: top;
             }
 
             div.col-contenu{
                 width: 60%;
                 padding-left: 16px;
+                vertical-align: top;
+                display: inline-block;
             }
 
             .float-right{
@@ -243,6 +247,8 @@
             .col-portfolio{
                 width: 47%;
                 transition: var(--transition-smooth);
+                vertical-align: top;
+                margin-bottom: 20px;
             }
 
             .col-portfolio:hover {
@@ -433,16 +439,17 @@
 
             .section h2 {
                 position: relative;
-                display: inline-block;
+                display: block;
+                width: 100%;
             }
 
             .section h2::after {
                 content: '';
                 position: absolute;
-                bottom: -8px;
+                bottom: -12px;
                 left: 50%;
                 transform: translateX(-50%);
-                width: 60px;
+                width: 80px;
                 height: 3px;
                 background: linear-gradient(90deg, transparent, var(--color1), transparent);
                 border-radius: 2px;
