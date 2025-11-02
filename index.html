@@ -40,10 +40,17 @@
             <img src="profile2.jpg" class="col-contenu"/>
             <div class="col-contenu float-right">
                 <div class="texte-avec-ligne-verticale">
-                    <p>Passionné par la technologie et l'informatique depuis le plus jeune âge, je me suis donné pour objectif de comprendre ce monde si unique de l'informatique. Très vite, mon attention s'est particulièrement portée sur la programmation, je trouve tellement singulier et spécial de pouvoir communiquer directement avec la machine rien qu'avec des lignes de codes. Maintenant, je suis étudiant en génie informatique, mais en même temps je suis développeur freelance avec 2 ans d'expérience.<br><br>
-                    Expert dans les domaines du web et des applications mobiles, je propose mes services personnalisés pour des missions freelance.</p>
-                    <a href="https://www.linkedin.com/in/Mbello-Diallo" target="_blank">En savoir plus sur mon profil</a>
-                </div> 
+                    <p>Passionné par la technologie et l'informatique depuis le plus jeune âge, j'ai toujours été fasciné par la capacité de transformer des idées en solutions concrètes grâce au code. Ce qui m'anime particulièrement, c'est cette possibilité unique de communiquer directement avec la machine pour créer des applications qui résolvent de vrais problèmes et améliorent le quotidien des utilisateurs.<br><br>
+
+                    Actuellement étudiant en génie informatique, je combine mes études avec une activité de développeur freelance depuis maintenant 2 ans. Cette double casquette me permet de rester à la pointe des technologies émergentes tout en acquérant une expérience pratique solide sur des projets réels.<br><br>
+
+                    Mon expertise s'étend principalement au développement web full-stack (HTML, CSS, Django, Python) et aux applications mobiles multiplateformes. Je maîtrise également le développement d'applications desktop avec une forte orientation vers la sécurité et la cryptographie. Chaque projet que j'entreprends est une opportunité d'apprendre, d'innover et de livrer des solutions robustes et élégantes.<br><br>
+
+                    Mon approche ? Une méthodologie rigoureuse, une communication transparente avec mes clients, et un souci constant de la qualité du code. Je ne me contente pas de faire fonctionner une application - je m'assure qu'elle soit performante, sécurisée, et facile à maintenir.<br><br>
+
+                    <strong>Domaines d'expertise :</strong> Développement Web, Applications Mobiles (iOS/Android), Applications Desktop, Sécurité & Cryptographie, Architecture Logicielle</p>
+                    <a href="https://www.linkedin.com/in/Mbello-Diallo" target="_blank">En savoir plus sur mon profil LinkedIn</a>
+                </div>
             </div>
         </div>
 
@@ -88,5 +95,55 @@
 
          <!-- SECTION BLANCHE FRAME -->
         <iframe src="contact-frame.html" scrolling="no">
+
+        <!-- BOUTON RETOUR EN HAUT -->
+        <a href="#" id="backToTop" title="Retour en haut">↑</a>
+
+        <!-- JAVASCRIPT POUR INTERACTIVITÉ -->
+        <script>
+            // Bouton retour en haut
+            const backToTopButton = document.getElementById('backToTop');
+
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 300) {
+                    backToTopButton.classList.add('show');
+                } else {
+                    backToTopButton.classList.remove('show');
+                }
+            });
+
+            backToTopButton.addEventListener('click', function(e) {
+                e.preventDefault();
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+
+            // Animation au scroll pour les éléments
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('fade-in-up');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            // Observer les sections
+            document.querySelectorAll('.section').forEach(section => {
+                observer.observe(section);
+            });
+
+            // Observer les cartes de portfolio
+            document.querySelectorAll('.col-portfolio').forEach(card => {
+                observer.observe(card);
+            });
+        </script>
     </body>
 </html>

@@ -33,15 +33,29 @@
     <div class="section">
         <div class="texte-avec-ligne-verticale">
             <p>
-                J'ai réalisé ce projet pour le plaisir. Il peut être installé sur n'importe quel smartphone.
+                Cette application mobile innovante exploite la puissance de l'intelligence artificielle pour analyser des visages et estimer l'âge des personnes à partir d'une simple photographie. Développée comme projet de recherche et d'apprentissage, elle démontre l'intégration réussie d'algorithmes de vision par ordinateur dans une application mobile native multiplateforme.
                 <br><br>
-                Son rôle ? déterminer l'âge d'une personne à partir de son image.
+                <strong>Fonctionnalités principales :</strong><br>
+                • <b>Capture photo en temps réel</b> : L'utilisateur peut prendre une photo directement depuis l'application ou charger une image existante de sa galerie<br>
+                • <b>Analyse par IA</b> : Un algorithme de deep learning analyse les caractéristiques faciales pour estimer l'âge avec précision<br>
+                • <b>Résultats instantanés</b> : L'estimation s'affiche en quelques secondes avec une interface intuitive<br>
+                • <b>Interface moderne</b> : Design épuré et expérience utilisateur optimisée pour iOS et Android
                 <br><br>
-                L'utilisateur a la possibilité de prendre une photo directement dans l'appli. Puis, grâce à un algorithme très puissant, l'appli détermine l'âge de la personne se trouvant sur la photo.
+                <strong>Architecture et technologies :</strong><br>
+                L'application est développée en <b>C# avec Xamarin.Forms</b>, permettant un déploiement multiplateforme efficace sur iOS et Android à partir d'une base de code unique. Le modèle d'intelligence artificielle utilise des réseaux de neurones convolutionnels (CNN) pré-entraînés pour la détection et l'analyse faciale.
                 <br><br>
-                Ce projet simple et parfaitement fonctionnel a été entièrement élaboré par moi.
+                L'architecture suit le pattern MVVM (Model-View-ViewModel) garantissant une séparation claire des responsabilités et facilitant la maintenance du code. L'accès à la caméra et à la galerie utilise les API natives des plateformes via des services de dépendance.
                 <br><br>
-                <u>Technologie utilisée:</u> <b>C#</b>
+                <strong>Défis techniques relevés :</strong><br>
+                • Optimisation des performances pour l'analyse en temps réel sur mobile<br>
+                • Gestion des permissions caméra/galerie sur différentes versions d'OS<br>
+                • Intégration du modèle d'IA avec gestion de la mémoire optimisée<br>
+                • Interface responsive s'adaptant à toutes les tailles d'écran
+                <br><br>
+                <strong>Résultat :</strong><br>
+                Une application mobile complète et fonctionnelle démontrant ma maîtrise du développement mobile multiplateforme et de l'intégration d'algorithmes d'intelligence artificielle dans des applications pratiques.
+                <br><br>
+                <u>Technologies utilisées:</u> <b>C#, Xamarin.Forms, .NET, Machine Learning, Vision par ordinateur, MVVM Pattern</b>
             </p>
             
             <div style="text-align: center; margin-top: 30px;">
@@ -62,5 +76,49 @@
     </div>
     <!--FRAME-->
     <iframe src="contact-frame.html" scrolling="no">
+
+    <!-- BOUTON RETOUR EN HAUT -->
+    <a href="#" id="backToTop" title="Retour en haut">↑</a>
+
+    <!-- JAVASCRIPT POUR INTERACTIVITÉ -->
+    <script>
+        // Bouton retour en haut
+        const backToTopButton = document.getElementById('backToTop');
+
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.add('show');
+            } else {
+                backToTopButton.classList.remove('show');
+            }
+        });
+
+        backToTopButton.addEventListener('click', function(e) {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Animation au scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in-up');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.section').forEach(section => {
+            observer.observe(section);
+        });
+    </script>
 </body>
 </html>

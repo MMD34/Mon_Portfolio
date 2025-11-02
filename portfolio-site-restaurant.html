@@ -33,15 +33,26 @@
     <div class="section">
         <div class="texte-avec-ligne-verticale">
             <p>
-                J'ai réalisé ce projet pour le fun. Il peut être utilisé par toute personne travaillant dans le domaine de la restauration.
+                Ce projet de site web professionnel a été développé pour répondre aux besoins spécifiques d'un restaurant souhaitant digitaliser sa présence et moderniser son service client. L'application web s'adresse particulièrement aux établissements de restauration désirant offrir une expérience utilisateur fluide et professionnelle à leur clientèle.
                 <br><br>
-                L'objectif ? Permettre au restaurant de gagner en visibilité et de proposer son menu de pizzas aux utilisateurs.
+                <strong>Objectifs du projet :</strong><br>
+                • Créer une vitrine digitale attractive pour augmenter la visibilité du restaurant<br>
+                • Permettre aux clients de consulter le menu complet en ligne<br>
+                • Faciliter la gestion du contenu pour le restaurateur sans compétences techniques<br>
+                • Offrir une expérience utilisateur optimale sur tous les appareils (responsive design)
                 <br><br>
-                Le restaurateur a la possibilité de modifier facilement son menu en ligne grâce à une interface d'administration sur-mesure que j'ai réalisé.
+                <strong>Fonctionnalités clés développées :</strong><br>
+                Le restaurateur dispose d'un <b>panneau d'administration Django personnalisé</b> lui permettant de gérer son menu en temps réel : ajout, modification et suppression de plats avec photos, descriptions et prix. L'interface intuitive ne nécessite aucune connaissance en programmation.
                 <br><br>
-                Ce projet simple mais fonctionnel, apporte une grande satisfaction au restaurateur.
+                Du côté client, le site propose une navigation fluide avec un design moderne et épuré, mettant en valeur les produits du restaurant. Le système est entièrement responsive, garantissant une expérience optimale sur smartphone, tablette et desktop.
                 <br><br>
-                <u>Technologies utilisées:</u> <b>HTML, CSS, DJANGO, PYTHON, HEROKU</b>
+                <strong>Architecture technique :</strong><br>
+                Le projet utilise Django comme framework backend, assurant robustesse et sécurité. La base de données relationnelle permet une gestion efficace des données. L'application est déployée sur Heroku avec configuration d'environnement de production optimisée. Le front-end combine HTML5 et CSS3 pour un design moderne et accessible.
+                <br><br>
+                <strong>Impact et résultats :</strong><br>
+                Cette solution complète a permis au restaurateur de gagner en autonomie dans la gestion de sa présence en ligne, tout en offrant à ses clients une interface moderne et pratique pour découvrir son menu.
+                <br><br>
+                <u>Technologies utilisées:</u> <b>HTML5, CSS3, Django 4.x, Python 3.x, PostgreSQL, Heroku, Git</b>
             </p>
             
             <div style="text-align:center; margin-top: 30px;">
@@ -62,5 +73,49 @@
     </div>
     <!--FRAME-->
     <iframe src="contact-frame.html" scrolling="no">
+
+    <!-- BOUTON RETOUR EN HAUT -->
+    <a href="#" id="backToTop" title="Retour en haut">↑</a>
+
+    <!-- JAVASCRIPT POUR INTERACTIVITÉ -->
+    <script>
+        // Bouton retour en haut
+        const backToTopButton = document.getElementById('backToTop');
+
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.add('show');
+            } else {
+                backToTopButton.classList.remove('show');
+            }
+        });
+
+        backToTopButton.addEventListener('click', function(e) {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Animation au scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in-up');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.section').forEach(section => {
+            observer.observe(section);
+        });
+    </script>
 </body>
 </html>

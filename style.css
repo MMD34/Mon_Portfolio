@@ -6,13 +6,72 @@
             :root{
                 --color1: #D89584;
                 --color2: #F4F4F4;
+                --shadow-light: 0 2px 8px rgba(0, 0, 0, 0.1);
+                --shadow-medium: 0 4px 12px rgba(0, 0, 0, 0.15);
+                --shadow-heavy: 0 8px 24px rgba(0, 0, 0, 0.2);
+                --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             }
 
             body{
                 margin: 0;
                 font-family: Arial;
                 line-height: 1.5;
+                scroll-behavior: smooth;
+            }
 
+            /* ANIMATIONS */
+            @keyframes fadeInUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(30px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+
+            @keyframes slideInLeft {
+                from {
+                    opacity: 0;
+                    transform: translateX(-30px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateX(0);
+                }
+            }
+
+            @keyframes slideInRight {
+                from {
+                    opacity: 0;
+                    transform: translateX(30px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateX(0);
+                }
+            }
+
+            @keyframes pulse {
+                0%, 100% {
+                    transform: scale(1);
+                }
+                50% {
+                    transform: scale(1.05);
+                }
+            }
+
+            .fade-in-up {
+                animation: fadeInUp 0.8s ease-out forwards;
+            }
+
+            .slide-in-left {
+                animation: slideInLeft 0.8s ease-out forwards;
+            }
+
+            .slide-in-right {
+                animation: slideInRight 0.8s ease-out forwards;
             }
 
             iframe{
@@ -183,6 +242,30 @@
 
             .col-portfolio{
                 width: 47%;
+                transition: var(--transition-smooth);
+            }
+
+            .col-portfolio:hover {
+                transform: translateY(-10px);
+            }
+
+            .col-portfolio img {
+                transition: var(--transition-smooth);
+                box-shadow: var(--shadow-light);
+                border-radius: 4px;
+            }
+
+            .col-portfolio:hover img {
+                box-shadow: var(--shadow-heavy);
+                transform: scale(1.02);
+            }
+
+            .col-portfolio a {
+                transition: var(--transition-smooth);
+            }
+
+            .col-portfolio a:hover {
+                color: var(--color1);
             }
 
             div.frame{
@@ -289,6 +372,102 @@
                 position: absolute;
                 right: 20px;
                 top: 5px
+            }
+
+            /* BOUTON RETOUR EN HAUT */
+            #backToTop {
+                position: fixed;
+                bottom: 30px;
+                right: 30px;
+                background-color: var(--color1);
+                color: white;
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                display: none;
+                align-items: center;
+                justify-content: center;
+                font-size: 24px;
+                cursor: pointer;
+                z-index: 1000;
+                box-shadow: var(--shadow-medium);
+                transition: var(--transition-smooth);
+                border: none;
+                text-decoration: none;
+            }
+
+            #backToTop:hover {
+                background-color: #c57e6d;
+                transform: translateY(-5px);
+                box-shadow: var(--shadow-heavy);
+            }
+
+            #backToTop.show {
+                display: flex;
+                animation: fadeInUp 0.5s ease-out;
+            }
+
+            /* BADGES DE COMPÉTENCES */
+            .skill-badge {
+                display: inline-block;
+                background: linear-gradient(135deg, var(--color1), #c57e6d);
+                color: white;
+                padding: 6px 14px;
+                border-radius: 20px;
+                font-size: 13px;
+                margin: 4px;
+                font-weight: bold;
+                box-shadow: var(--shadow-light);
+                transition: var(--transition-smooth);
+            }
+
+            .skill-badge:hover {
+                transform: translateY(-2px);
+                box-shadow: var(--shadow-medium);
+            }
+
+            /* AMÉLIORATION DES SECTIONS */
+            .section {
+                transition: var(--transition-smooth);
+            }
+
+            .section h2 {
+                position: relative;
+                display: inline-block;
+            }
+
+            .section h2::after {
+                content: '';
+                position: absolute;
+                bottom: -8px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 60px;
+                height: 3px;
+                background: linear-gradient(90deg, transparent, var(--color1), transparent);
+                border-radius: 2px;
+            }
+
+            /* AMÉLIORATION DES IMAGES */
+            img.col-contenu {
+                transition: var(--transition-smooth);
+                box-shadow: var(--shadow-light);
+                border-radius: 8px;
+            }
+
+            img.col-contenu:hover {
+                transform: scale(1.03);
+                box-shadow: var(--shadow-medium);
+            }
+
+            img.portfolio {
+                transition: var(--transition-smooth);
+                box-shadow: var(--shadow-light);
+                border-radius: 8px;
+            }
+
+            img.portfolio:hover {
+                box-shadow: var(--shadow-medium);
             }
 
             /* RESPONSIVE DESIGN*/
