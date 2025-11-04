@@ -68,5 +68,6 @@ Downloads/
 
 # Exception: Allow specific project files
 !downloads/MBello_Encryption.zip
+!public/downloads/MBello_Encryption.zip
 !project4.jpg
 !project4small.jpg
