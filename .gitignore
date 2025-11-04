@@ -1,6 +1,6 @@
 # Dependencies
 node_modules/
-package-lock.json
+# package-lock.json - Now tracked for deployment consistency
 
 # Development files
 src/
@@ -30,21 +30,22 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# Old files (backups)
-index.html
-style.css
-contact-frame.html
-cover.jpg
-cover_overlay.png
-header.jpg
-*.svg
-profile.png
-profile2.jpg
-project*.jpg
-Zephyr_Password_Manager.png
-nul
-AMELIORATIONS.md
-README_ZEPHYR_PASSWORD_MANAGER.md
+# Old files (backups) - kept at root level only
+# Note: public/index.html is NOT ignored - it's needed for GitHub Pages
+/index.html
+/style.css
+/contact-frame.html
+/cover.jpg
+/cover_overlay.png
+/header.jpg
+/*.svg
+/profile.png
+/profile2.jpg
+/project*.jpg
+/Zephyr_Password_Manager.png
+/nul
+/AMELIORATIONS.md
+/README_ZEPHYR_PASSWORD_MANAGER.md
 
 # Keep only public folder for GitHub Pages
 
