@@ -1,0 +1,49 @@
+# Dependencies
+node_modules/
+package-lock.json
+
+# Development files
+src/
+
+# Build files (we'll commit the built CSS)
+# Uncomment if you want to build on GitHub Actions
+# public/build/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Local development
+.env
+.env.local
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Old files (backups)
+index.html
+style.css
+contact-frame.html
+cover.jpg
+cover_overlay.png
+header.jpg
+*.svg
+profile.png
+profile2.jpg
+project*.jpg
+Zephyr_Password_Manager.png
+nul
+AMELIORATIONS.md
+README_ZEPHYR_PASSWORD_MANAGER.md
+
+# Keep only public folder for GitHub Pages

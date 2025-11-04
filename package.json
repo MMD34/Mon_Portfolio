@@ -1,0 +1,24 @@
+{
+  "name": "mbello-portfolio",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "postcss ./src/css/tailwind.css -o ./public/build/tailwind.css --watch",
+    "build": "postcss ./src/css/tailwind.css -o ./public/build/tailwind.css --env production",
+    "watch": "postcss ./src/css/tailwind.css -o ./public/build/tailwind.css --watch"
+  },
+  "keywords": [
+    "portfolio",
+    "tailwind",
+    "web-development"
+  ],
+  "author": "M'bello Diallo",
+  "license": "ISC",
+  "description": "Portfolio professionnel de M'bello Diallo - Développeur Freelance",
+  "devDependencies": {
+    "autoprefixer": "^10.4.21",
+    "cssnano": "^7.1.2",
+    "postcss-cli": "^11.0.1",
+    "tailwindcss": "^3.4.17"
+  }
+}
