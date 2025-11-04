@@ -47,3 +47,21 @@ AMELIORATIONS.md
 README_ZEPHYR_PASSWORD_MANAGER.md
 
 # Keep only public folder for GitHub Pages
+
+# Large files and archives
+*.zip
+*.rar
+*.7z
+*.tar
+*.tar.gz
+*.gz
+*.iso
+*.dmg
+*.exe
+*.msi
+*.deb
+*.rpm
+
+# Downloads folder
+downloads/
+Downloads/
