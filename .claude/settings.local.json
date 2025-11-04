@@ -12,7 +12,9 @@
       "Bash(mkdir:*)",
       "Bash(npm run build:*)",
       "Bash(dir:*)",
-      "Bash(npx postcss:*)"
+      "Bash(npx postcss:*)",
+      "Bash(copy \"MbelloEncryption.png\" \"project4.jpg\")",
+      "Bash(copy \"MbelloEncryption.png\" \"project4small.jpg\")"
     ],
     "deny": [],
     "ask": []
