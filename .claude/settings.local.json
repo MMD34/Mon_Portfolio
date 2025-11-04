@@ -2,7 +2,12 @@
   "permissions": {
     "allow": [
       "Bash(copy \"Zephyr_Password_Manager.png\" \"project3small.jpg\")",
-      "Bash(copy \"Zephyr_Password_Manager.png\" \"project3.jpg\")"
+      "Bash(copy \"Zephyr_Password_Manager.png\" \"project3.jpg\")",
+      "Bash(git gc:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git count-objects:*)",
+      "Bash(git push:*)"
     ],
     "deny": [],
     "ask": []
