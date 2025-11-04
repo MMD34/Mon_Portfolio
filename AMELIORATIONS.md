@@ -32,7 +32,7 @@ Ce document détaille toutes les améliorations apportées à votre portfolio po
 - Section "Défis techniques relevés"
 - Mise en avant des compétences en IA et vision par ordinateur
 
----
+----
 
 ## 🎨 Améliorations Visuelles CSS
 
