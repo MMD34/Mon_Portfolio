@@ -28,9 +28,22 @@ jobs:
       - name: Build Tailwind CSS
         run: npm run build
 
+      - name: Verify build output
+        run: |
+          echo "Checking build output..."
+          ls -la public/
+          ls -la public/build/
+          if [ ! -f "public/build/tailwind.css" ]; then
+            echo "Error: tailwind.css not found!"
+            exit 1
+          fi
+          echo "Build verification successful!"
+
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./public
           publish_branch: gh-pages
+          user_name: 'github-actions[bot]'
+          user_email: 'github-actions[bot]@users.noreply.github.com'
