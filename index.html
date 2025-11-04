@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#D89584">
+    <meta name="description" content="Portfolio de M'bello Diallo - Développeur Freelance Full-Stack">
+    <link rel="stylesheet" href="build/tailwind.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+        rel="stylesheet">
+    <title>M'bello Diallo - Développeur Freelance</title>
+</head>
+
+<body class="font-sans text-gray-900 dark:text-white bg-white dark:bg-dark-background transition-colors duration-300">
+    <!-- Dark mode background gradients -->
+    <div class="fixed inset-0 -z-10 opacity-0 dark:opacity-100 transition-opacity duration-500 pointer-events-none">
+        <div class="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-secondary/10"></div>
+    </div>
+
+    <!-- Header -->
+    <header
+        class="fixed w-full top-0 z-50 bg-white/95 dark:bg-dark-background/95 backdrop-blur-sm shadow-sm transition-all duration-300">
+        <div class="container mx-auto px-4">
+            <nav class="flex justify-between items-center py-4">
+                <div class="flex items-center">
+                    <span class="text-xl font-extrabold">M'bello Diallo</span>
+                    <span class="text-primary text-2xl ml-1">●</span>
+                </div>
+                <ul class="hidden md:flex space-x-8">
+                    <li>
+                        <a href="#features"
+                            class="text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors">Expertise</a>
+                    </li>
+                    <li>
+                        <a href="#about"
+                            class="text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors">À Propos</a>
+                    </li>
+                    <li>
+                        <a href="#skills"
+                            class="text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors">Compétences</a>
+                    </li>
+                    <li>
+                        <a href="#projects"
+                            class="text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors">Projets</a>
+                    </li>
+                    <li>
+                        <a href="#contact"
+                            class="text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors">Contact</a>
+                    </li>
+                </ul>
+                <div class="flex items-center space-x-4">
+                    <button id="themeToggle" class="">
+                        <i class="fa-solid fa-moon text-gray-600 dark:text-gray-400"></i>
+                    </button>
+                    <button class="md:hidden p-2" id="menuToggle">
+                        <div class="w-6 h-5 flex flex-col justify-between">
+                            <span class="w-full h-0.5 bg-gray-600 dark:bg-gray-400 transition-all"></span>
+                            <span class="w-full h-0.5 bg-gray-600 dark:bg-gray-400 transition-all"></span>
+                            <span class="w-full h-0.5 bg-gray-600 dark:bg-gray-400 transition-all"></span>
+                        </div>
+                    </button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div id="mobileMenu"
+        class="fixed inset-0 bg-white dark:bg-dark-background z-50 transform translate-x-full transition-transform duration-300 md:hidden">
+        <div class="container mx-auto px-4 h-full flex flex-col">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center">
+                    <span class="text-xl font-extrabold">M'bello Diallo</span>
+                    <span class="text-primary text-2xl ml-1">●</span>
+                </div>
+                <button id="closeMenu" class="p-2">
+                    <i class="fa-solid fa-square-xmark text-gray-600 dark:text-gray-400 text-2xl"></i>
+                </button>
+            </div>
+            <ul class="flex-1 flex flex-col justify-center items-center space-y-8">
+                <li>
+                    <a href="#features"
+                        class="text-2xl text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors">Expertise</a>
+                </li>
+                <li>
+                    <a href="#about"
+                        class="text-2xl text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors">À Propos</a>
+                </li>
+                <li>
+                    <a href="#skills"
+                        class="text-2xl text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors">Compétences</a>
+                </li>
+                <li>
+                    <a href="#projects"
+                        class="text-2xl text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors">Projets</a>
+                </li>
+                <li>
+                    <a href="#contact"
+                        class="text-2xl text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors">Contact</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="hero" class="min-h-screen flex items-center pt-20 pb-16 relative overflow-hidden">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto text-center">
+                <h1 class="text-4xl md:text-6xl font-bold mb-6">
+                    Le <span
+                        class="bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">Développeur
+                        Full-Stack</span> Pour Vos Projets
+                </h1>
+                <p class="text-xl md:text-2xl text-gray-600 dark:text-gray-400 mb-8">
+                    Je développe <strong>votre projet WEB</strong> ou vos <strong>Applications mobiles</strong>
+                    iOS/Android de A à Z
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+                    <a href="#projects"
+                        class="px-8 py-3 bg-primary text-white rounded-lg shadow-lg hover:bg-primary/90 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-coral">
+                        Voir Projets
+                    </a>
+                    <a href="#contact"
+                        class="px-8 py-3 bg-white dark:bg-dark-background-secondary text-gray-900 dark:text-white border border-gray-200 dark:border-gray-700 rounded-lg hover:border-primary dark:hover:border-primary transition-colors">Me
+                        Contacter</a>
+                </div>
+                <div class="bg-gray-100 dark:bg-dark-background-secondary rounded-lg overflow-hidden shadow-lg max-w-2xl mx-auto"
+                    id="terminal-container">
+                    <div class="flex items-center space-x-2 p-3 bg-gray-200 dark:bg-dark-background">
+                        <span class="w-3 h-3 rounded-full bg-red-500"></span>
+                        <span class="w-3 h-3 rounded-full bg-yellow-500"></span>
+                        <span class="w-3 h-3 rounded-full bg-green-500"></span>
+                    </div>
+                    <div class="p-6 font-mono terminal-content">
+                        <span class="text-green-500">$</span> <span
+                            class="command-text text-gray-900 dark:text-white"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features"
+        class="py-24 bg-gray-50 dark:bg-dark-background-secondary translate-y-4 transition-all duration-500 opacity-0">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-4">Domaines d'Expertise</h2>
+            <p class="text-xl text-gray-600 dark:text-gray-400 text-center mb-16">
+                Des solutions complètes pour tous vos besoins numériques
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Feature Card 1 -->
+                <div
+                    class="bg-white dark:bg-dark-background p-8 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mb-6">
+                        <i class="fa-solid fa-code text-primary text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Développement Web</h3>
+                    <p class="text-gray-600 dark:text-gray-400">Sites web full-stack avec Django, HTML5, CSS3, Python
+                        et PostgreSQL pour des solutions robustes et performantes.</p>
+                </div>
+                <!-- Feature Card 2 -->
+                <div
+                    class="bg-white dark:bg-dark-background p-8 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mb-6">
+                        <i class="fa-solid fa-mobile-screen-button text-primary text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Applications Mobiles</h3>
+                    <p class="text-gray-600 dark:text-gray-400">Applications multiplateformes iOS/Android avec Xamarin,
+                        C#, .NET et intégration d'IA et Machine Learning.</p>
+                </div>
+                <!-- Feature Card 3 -->
+                <div
+                    class="bg-white dark:bg-dark-background p-8 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mb-6">
+                        <i class="fa-solid fa-desktop text-primary text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Applications Desktop</h3>
+                    <p class="text-gray-600 dark:text-gray-400">Logiciels desktop sécurisés avec Python, cryptographie
+                        avancée et focus sur la protection des données.</p>
+                </div>
+                <!-- Feature Card 4 -->
+                <div
+                    class="bg-white dark:bg-dark-background p-8 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mb-6">
+                        <i class="fa-solid fa-diagram-project text-primary text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Architecture Logicielle</h3>
+                    <p class="text-gray-600 dark:text-gray-400">Conception d'architectures élégantes, maintenables et
+                        évolutives selon les meilleures pratiques du développement.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-24 translate-y-4 transition-all duration-500 opacity-0">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div>
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6">En Savoir Plus</h2>
+                    <p class="text-xl text-gray-600 dark:text-gray-400 mb-6">
+                        Passionné par la technologie et l'informatique depuis le plus jeune âge.
+                    </p>
+                    <p class="text-gray-600 dark:text-gray-400 mb-6">
+                        Passionné par la technologie et l'informatique depuis le plus jeune âge, j'ai toujours été
+                        fasciné par la capacité de transformer des idées en solutions concrètes grâce au code. Ce qui
+                        m'anime particulièrement, c'est cette possibilité unique de communiquer directement avec la
+                        machine pour créer des applications qui résolvent de vrais problèmes et améliorent le quotidien
+                        des utilisateurs.
+                    </p>
+                    <p class="text-gray-600 dark:text-gray-400 mb-6">
+                        Actuellement étudiant en génie informatique, je combine mes études avec une activité de
+                        développeur freelance depuis maintenant 2 ans. Cette double casquette me permet de rester à la
+                        pointe des technologies émergentes tout en acquérant une expérience pratique solide sur des
+                        projets réels.
+                    </p>
+                    <p class="text-gray-600 dark:text-gray-400 mb-6">
+                        Mon expertise s'étend principalement au développement web full-stack (HTML, CSS, Django, Python)
+                        et aux applications mobiles multiplateformes. Je maîtrise également le développement
+                        d'applications desktop avec une forte orientation vers la sécurité et la cryptographie. Chaque
+                        projet que j'entreprends est une opportunité d'apprendre, d'innover et de livrer des solutions
+                        robustes et élégantes.
+                    </p>
+                    <p class="text-gray-600 dark:text-gray-400 mb-8">
+                        Mon approche ? Une méthodologie rigoureuse, une communication transparente avec mes clients, et
+                        un souci constant de la qualité du code. Je ne me contente pas de faire fonctionner une
+                        application - je m'assure qu'elle soit performante, sécurisée, et facile à maintenir.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="#contact"
+                            class="px-8 py-3 bg-primary text-white rounded-lg shadow-lg hover:bg-primary/90 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-coral text-center">
+                            Me Contacter
+                        </a>
+                        <a href="https://www.linkedin.com/in/Mbello-Diallo" target="_blank"
+                            class="px-8 py-3 bg-white dark:bg-dark-background-secondary text-gray-900 dark:text-white border border-gray-200 dark:border-gray-700 rounded-lg hover:border-primary dark:hover:border-primary transition-colors text-center">
+                            <i class="fa-brands fa-linkedin mr-2"></i>LinkedIn
+                        </a>
+                    </div>
+                </div>
+                <div class="relative">
+                    <div
+                        class="w-72 h-72 mx-auto animate-morph bg-gradient-to-br from-primary via-secondary to-accent rounded-full relative overflow-hidden">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-br from-primary/50 via-secondary/50 to-accent/50 rounded-full blur-2xl animate-morph">
+                        </div>
+                        <img src="assets/profile2.jpg" alt="M'bello Diallo"
+                            class="absolute inset-0 w-full h-full object-cover z-10">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills"
+        class="py-24 bg-gray-50 dark:bg-dark-background-secondary translate-y-4 transition-all duration-500 opacity-0">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-4">Mes Compétences</h2>
+            <p class="text-xl text-gray-600 dark:text-gray-400 text-center mb-16">Technologies et outils que je
+                maîtrise pour donner vie à vos projets</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Skill Card 1 -->
+                <div class="bg-white dark:bg-dark-background p-8 rounded-lg shadow-lg">
+                    <div class="w-16 h-16 bg-red-500/10 rounded-full flex items-center justify-center mb-6">
+                        <i class="fa-brands fa-html5 text-red-500 text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">HTML5</h3>
+                    <div class="w-full h-2 bg-gray-200 dark:bg-dark-background-tertiary rounded-full overflow-hidden">
+                        <div class="w-[95%] h-full bg-gradient-to-r from-primary to-secondary rounded-full"></div>
+                    </div>
+                </div>
+                <!-- Skill Card 2 -->
+                <div class="bg-white dark:bg-dark-background p-8 rounded-lg shadow-lg">
+                    <div class="w-16 h-16 bg-green-500/10 rounded-full flex items-center justify-center mb-6">
+                        <i class="fa-brands fa-python text-green-500 text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Python / Django</h3>
+                    <div class="w-full h-2 bg-gray-200 dark:bg-dark-background-tertiary rounded-full overflow-hidden">
+                        <div class="w-[90%] h-full bg-gradient-to-r from-primary to-secondary rounded-full"></div>
+                    </div>
+                </div>
+                <!-- Skill Card 3 -->
+                <div class="bg-white dark:bg-dark-background p-8 rounded-lg shadow-lg">
+                    <div class="w-16 h-16 bg-yellow-500/10 rounded-full flex items-center justify-center mb-6">
+                        <i class="fa-brands fa-js text-yellow-500 text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">JavaScript</h3>
+                    <div class="w-full h-2 bg-gray-200 dark:bg-dark-background-tertiary rounded-full overflow-hidden">
+                        <div class="w-[80%] h-full bg-gradient-to-r from-primary to-secondary rounded-full"></div>
+                    </div>
+                </div>
+                <!-- Skill Card 4 -->
+                <div class="bg-white dark:bg-dark-background p-8 rounded-lg shadow-lg">
+                    <div class="w-16 h-16 bg-purple-500/10 rounded-full flex items-center justify-center mb-6">
+                        <i class="fa-brands fa-microsoft text-purple-500 text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">C# / Xamarin</h3>
+                    <div class="w-full h-2 bg-gray-200 dark:bg-dark-background-tertiary rounded-full overflow-hidden">
+                        <div class="w-[85%] h-full bg-gradient-to-r from-primary to-secondary rounded-full"></div>
+                    </div>
+                </div>
+                <!-- Skill Card 5 -->
+                <div class="bg-white dark:bg-dark-background p-8 rounded-lg shadow-lg">
+                    <div class="w-16 h-16 bg-blue-500/10 rounded-full flex items-center justify-center mb-6">
+                        <i class="fa-solid fa-database text-blue-500 text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">SQL / PostgreSQL</h3>
+                    <div class="w-full h-2 bg-gray-200 dark:bg-dark-background-tertiary rounded-full overflow-hidden">
+                        <div class="w-[85%] h-full bg-gradient-to-r from-primary to-secondary rounded-full"></div>
+                    </div>
+                </div>
+                <!-- Skill Card 6 -->
+                <div class="bg-white dark:bg-dark-background p-8 rounded-lg shadow-lg">
+                    <div class="w-16 h-16 bg-orange-500/10 rounded-full flex items-center justify-center mb-6">
+                        <i class="fa-solid fa-shield-halved text-orange-500 text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Cryptographie</h3>
+                    <div class="w-full h-2 bg-gray-200 dark:bg-dark-background-tertiary rounded-full overflow-hidden">
+                        <div class="w-[80%] h-full bg-gradient-to-r from-primary to-secondary rounded-full"></div>
+                    </div>
+                </div>
+                <!-- Skill Card 7 -->
+                <div class="bg-white dark:bg-dark-background p-8 rounded-lg shadow-lg">
+                    <div class="w-16 h-16 bg-pink-500/10 rounded-full flex items-center justify-center mb-6">
+                        <i class="fa-solid fa-mobile-screen text-pink-500 text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Développement Mobile</h3>
+                    <div class="w-full h-2 bg-gray-200 dark:bg-dark-background-tertiary rounded-full overflow-hidden">
+                        <div class="w-[85%] h-full bg-gradient-to-r from-primary to-secondary rounded-full"></div>
+                    </div>
+                </div>
+                <!-- Skill Card 8 -->
+                <div class="bg-white dark:bg-dark-background p-8 rounded-lg shadow-lg">
+                    <div class="w-16 h-16 bg-teal-500/10 rounded-full flex items-center justify-center mb-6">
+                        <i class="fa-solid fa-brain text-teal-500 text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Machine Learning</h3>
+                    <div class="w-full h-2 bg-gray-200 dark:bg-dark-background-tertiary rounded-full overflow-hidden">
+                        <div class="w-[75%] h-full bg-gradient-to-r from-primary to-secondary rounded-full"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-24 translate-y-4 transition-all duration-500 opacity-0">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-4">Projets Réalisés</h2>
+            <p class="text-xl text-gray-600 dark:text-gray-400 text-center mb-16">
+                Découvrez quelques-uns de mes projets récents
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Project Card 1 -->
+                <div
+                    class="bg-white dark:bg-dark-background rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                    <div class="h-48 relative">
+                        <img src="assets/project1.jpg" alt="Site Web Restaurant" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-black/20"></div>
+                        <div class="absolute top-4 right-4">
+                            <span
+                                class="px-3 py-1 bg-yellow-500 text-white rounded-full text-sm font-semibold">En
+                                Finalisation</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-4">Site Web Restaurant Professionnel</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4 h-24">
+                            Site web complet pour restaurant avec panneau d'administration Django permettant la gestion
+                            du menu, des photos et des contenus. Déployé sur Heroku avec base de données PostgreSQL.
+                        </p>
+                        <div class="flex flex-wrap gap-2 my-6">
+                            <span
+                                class="px-3 py-1 bg-gray-100 dark:bg-dark-background-secondary text-gray-600 dark:text-gray-400 rounded-full text-sm">HTML5</span>
+                            <span
+                                class="px-3 py-1 bg-gray-100 dark:bg-dark-background-secondary text-gray-600 dark:text-gray-400 rounded-full text-sm">CSS3</span>
+                            <span
+                                class="px-3 py-1 bg-gray-100 dark:bg-dark-background-secondary text-gray-600 dark:text-gray-400 rounded-full text-sm">Django</span>
+                            <span
+                                class="px-3 py-1 bg-gray-100 dark:bg-dark-background-secondary text-gray-600 dark:text-gray-400 rounded-full text-sm">Python</span>
+                            <span
+                                class="px-3 py-1 bg-gray-100 dark:bg-dark-background-secondary text-gray-600 dark:text-gray-400 rounded-full text-sm">PostgreSQL</span>
+                            <span
+                                class="px-3 py-1 bg-gray-100 dark:bg-dark-background-secondary text-gray-600 dark:text-gray-400 rounded-full text-sm">Heroku</span>
+                        </div>
+                        <div class="flex gap-4">
+                            <a href="portfolio-site-restaurant.html"
+                                class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors">
+                                <i class="fa-solid fa-info-circle mr-2"></i>Voir Détails
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Project Card 2 -->
+                <div
+                    class="bg-white dark:bg-dark-background rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                    <div class="h-48 relative">
+                        <img src="assets/project2.jpg" alt="Application Machina" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-black/20"></div>
+                        <div class="absolute top-4 right-4">
+                            <span
+                                class="px-3 py-1 bg-yellow-500 text-white rounded-full text-sm font-semibold">En
+                                Finalisation</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-4">Machina - Estimation d'Âge par IA</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4 h-24">
+                            Application mobile utilisant l'intelligence artificielle pour estimer l'âge facial à partir
+                            d'une photo. Intégration de CNN et Computer Vision pour une analyse en temps réel.
+                        </p>
+                        <div class="flex flex-wrap gap-2 my-6">
+                            <span
+                                class="px-3 py-1 bg-gray-100 dark:bg-dark-background-secondary text-gray-600 dark:text-gray-400 rounded-full text-sm">C#</span>
+                            <span
+                                class="px-3 py-1 bg-gray-100 dark:bg-dark-background-secondary text-gray-600 dark:text-gray-400 rounded-full text-sm">Xamarin</span>
+                            <span
+                                class="px-3 py-1 bg-gray-100 dark:bg-dark-background-secondary text-gray-600 dark:text-gray-400 rounded-full text-sm">.NET</span>
+                            <span
+                                class="px-3 py-1 bg-gray-100 dark:bg-dark-background-secondary text-gray-600 dark:text-gray-400 rounded-full text-sm">ML</span>
+                            <span
+                                class="px-3 py-1 bg-gray-100 dark:bg-dark-background-secondary text-gray-600 dark:text-gray-400 rounded-full text-sm">Computer
+                                Vision</span>
+                            <span
+                                class="px-3 py-1 bg-gray-100 dark:bg-dark-background-secondary text-gray-600 dark:text-gray-400 rounded-full text-sm">MVVM</span>
+                        </div>
+                        <div class="flex gap-4">
+                            <a href="portfolio-application-mobile-machina.html"
+                                class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors">
+                                <i class="fa-solid fa-info-circle mr-2"></i>Voir Détails
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Project Card 3 -->
+                <div
+                    class="bg-white dark:bg-dark-background rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                    <div class="h-48 relative">
+                        <img src="assets/project3.jpg" alt="Zephyr Password Manager" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-black/20"></div>
+                        <div class="absolute top-4 right-4">
+                            <span
+                                class="px-3 py-1 bg-green-500 text-white rounded-full text-sm font-semibold">v1.0.0</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-4">Zephyr Password Manager</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4 h-24">
+                            Gestionnaire de mots de passe sécurisé hors ligne avec chiffrement AES-128 et Argon2id.
+                            Générateur de mots de passe, intégration Have I Been Pwned, import/export CSV/JSON.
+                        </p>
+                        <div class="flex flex-wrap gap-2 my-6">
+                            <span
+                                class="px-3 py-1 bg-gray-100 dark:bg-dark-background-secondary text-gray-600 dark:text-gray-400 rounded-full text-sm">Python</span>
+                            <span
+                                class="px-3 py-1 bg-gray-100 dark:bg-dark-background-secondary text-gray-600 dark:text-gray-400 rounded-full text-sm">CustomTkinter</span>
+                            <span
+                                class="px-3 py-1 bg-gray-100 dark:bg-dark-background-secondary text-gray-600 dark:text-gray-400 rounded-full text-sm">Cryptography</span>
+                            <span
+                                class="px-3 py-1 bg-gray-100 dark:bg-dark-background-secondary text-gray-600 dark:text-gray-400 rounded-full text-sm">Argon2</span>
+                            <span
+                                class="px-3 py-1 bg-gray-100 dark:bg-dark-background-secondary text-gray-600 dark:text-gray-400 rounded-full text-sm">SQLite</span>
+                        </div>
+                        <div class="flex gap-4">
+                            <a href="downloads/ZephyrPasswordManager.zip" download
+                                class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors">
+                                <i class="fa-solid fa-download mr-2"></i>Télécharger
+                            </a>
+                            <a href="portfolio-zephyr-password-manager.html"
+                                class="flex items-center text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-primary transition-colors">
+                                <i class="fa-solid fa-info-circle mr-2"></i>Détails
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact"
+        class="py-24 bg-gray-50 dark:bg-dark-background-secondary translate-y-4 transition-all duration-500 opacity-0">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-4">Me Contacter</h2>
+            <p class="text-xl text-gray-600 dark:text-gray-400 text-center mb-16">
+                Intéressé par une collaboration ? Prenons contact
+            </p>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+                <!-- Contact Info -->
+                <div class="lg:col-span-1 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-1 gap-6">
+                    <!-- Email -->
+                    <div class="bg-white dark:bg-dark-background p-6 rounded-lg shadow-lg text-center">
+                        <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fa-solid fa-envelope text-primary text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Email Principal</h3>
+                        <a href="mailto:diallombello860@gmail.com"
+                            class="text-gray-600 dark:text-gray-400 hover:text-primary transition-colors">diallombello860@gmail.com</a>
+                        <br>
+                        <a href="mailto:mbello24@hotmail.ca"
+                            class="text-gray-600 dark:text-gray-400 hover:text-primary transition-colors text-sm">mbello24@hotmail.ca</a>
+                    </div>
+                    <!-- Phone -->
+                    <div class="bg-white dark:bg-dark-background p-6 rounded-lg shadow-lg text-center">
+                        <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fa-solid fa-phone text-primary text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Téléphone</h3>
+                        <a href="tel:+18733768878"
+                            class="text-gray-600 dark:text-gray-400 hover:text-primary transition-colors">+1 (873)
+                            376-8878</a>
+                    </div>
+                    <!-- Social -->
+                    <div class="bg-white dark:bg-dark-background p-6 rounded-lg shadow-lg text-center">
+                        <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fa-solid fa-globe text-primary text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Réseaux Sociaux</h3>
+                        <div class="flex justify-center space-x-4">
+                            <a href="https://www.linkedin.com/in/Mbello-Diallo" target="_blank"
+                                class="w-10 h-10 bg-gray-100 dark:bg-dark-background-secondary rounded-full flex items-center justify-center text-gray-600 hover:text-primary dark:hover:text-primary dark:text-gray-400 transition-all duration-300">
+                                <i class="fa-brands fa-linkedin"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="lg:col-span-2">
+                    <form id="contactForm" class="bg-white dark:bg-dark-background p-8 rounded-lg shadow-lg">
+                        <h3 class="text-2xl font-bold mb-6">Envoyez-moi un Message</h3>
+                        <div class="space-y-6">
+                            <div>
+                                <label for="name"
+                                    class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Nom</label>
+                                <input type="text" name="name" id="name" required
+                                    class="w-full px-4 py-3 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-dark-background-secondary text-gray-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-transparent transition-colors outline-none">
+                            </div>
+                            <div>
+                                <label for="email"
+                                    class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Email</label>
+                                <input type="email" name="email" id="email" required
+                                    class="w-full px-4 py-3 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-dark-background-secondary text-gray-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-transparent transition-colors outline-none">
+                            </div>
+                            <div>
+                                <label for="message"
+                                    class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Message</label>
+                                <textarea type="text" name="message" id="message" rows="5" required
+                                    class="w-full px-4 py-3 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-dark-background-secondary text-gray-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-transparent transition-colors outline-none"></textarea>
+                            </div>
+                            <button type="submit"
+                                class="w-full px-8 py-3 bg-primary text-white rounded-lg shadow-lg hover:bg-primary/90 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-coral">Envoyer
+                                Message</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-white dark:bg-dark-background py-12 border-t border-gray-200 dark:border-gray-800">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center mb-8">
+                <div class="flex items-center mb-4 md:mb-0">
+                    <span class="text-xl font-extrabold">M'bello Diallo</span>
+                    <span class="text-primary text-2xl ml-1">●</span>
+                </div>
+                <ul class="flex flex-wrap justify-center gap-6 mb-0">
+                    <li>
+                        <a href="#features"
+                            class="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-primary transition-colors">Expertise</a>
+                    </li>
+                    <li>
+                        <a href="#about"
+                            class="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-primary transition-colors">À
+                            Propos</a>
+                    </li>
+                    <li>
+                        <a href="#skills"
+                            class="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-primary transition-colors">Compétences</a>
+                    </li>
+                    <li>
+                        <a href="#projects"
+                            class="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-primary transition-colors">Projets</a>
+                    </li>
+                    <li>
+                        <a href="#contact"
+                            class="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-primary transition-colors">Contact</a>
+                    </li>
+                </ul>
+                <div class="flex gap-4 mt-4 md:mt-0">
+                    <a href="https://www.linkedin.com/in/Mbello-Diallo" target="_blank"
+                        class="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-primary transition-colors">
+                        <i class="fa-brands fa-linkedin text-xl"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="text-center text-gray-600 dark:text-gray-400 text-sm">
+                <p>&copy; 2025 M'bello Diallo - Développeur Freelance. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
