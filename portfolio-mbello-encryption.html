@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>M'Bello Encryption</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+
+    <!--HEADER-->
+    <div class="portfolio-header">
+        <div class="texte-avec-ligne-verticale"
+        style="margin-left: 16px; margin-top: 22px; height: 45px;">
+            <p class="portfolio-header-title">M'bello Diallo</p>
+        </div>
+        <a class="me-contacter me-contacter-portfolio"
+
+        href="mailto:mbello24@hotmail.ca?subject=Contact%20depuis%20MbelloDiallo.com" target="_blank">ME CONTACTER</a>
+
+    </div>
+
+    <!--SECTION GRISE TITRE-->
+    <div class="section section-grise1" style="padding-top: 20px;">
+        <a class="portfolio-back" href="index.html">Retour</a>
+        <div class="separateur" style="margin-top: -12px;"></div>
+        <h1 class="portfolio">Portfolio</h1>
+        <h2 class="portfolio">M'Bello Encryption</h2>
+    </div>
+
+    <!--SECTION CONTENU-->
+    <div class="section">
+        <div class="texte-avec-ligne-verticale">
+            <p>
+                M'Bello Encryption est une application de chiffrement moderne et sécurisée pour Windows, offrant 6 algorithmes de chiffrement allant du classique au moderne, avec une interface utilisateur ultra moderne et un coffre-fort sécurisé pour vos clés.
+                <br><br>
+                Cette application combine éducation et sécurité pratique. Elle permet d'explorer les algorithmes de chiffrement historiques (Vigenère, César, ROT13) tout en offrant des solutions de chiffrement modernes et robustes (AES-GCM, ChaCha20) pour protéger vos données sensibles.
+                <br><br>
+                L'interface moderne en mode sombre/clair intègre des outils pratiques comme un indicateur de puissance des mots de passe, des boutons utilitaires (Copier, Coller, Échanger, Effacer), et la possibilité d'importer/exporter des fichiers.
+                <br><br>
+                Les fonctionnalités clés incluent :
+                <br>
+                • <b>6 algorithmes de chiffrement</b> : Vigenère, César, ROT13, Base64, AES-GCM (recommandé), ChaCha20
+                <br>
+                • <b>Coffre-fort sécurisé</b> protégé par mot de passe maître avec PBKDF2 (200,000 itérations) et chiffrement AES-GCM
+                <br>
+                • <b>Générateur de clés sécurisées</b> utilisant des méthodes cryptographiquement sûres
+                <br>
+                • <b>Interface ultra moderne</b> avec CustomTkinter, mode sombre/clair et indicateur de force des mots de passe
+                <br>
+                • <b>Import/Export</b> de fichiers et des clés du coffre-fort en JSON
+                <br>
+                • <b>Historique des opérations</b> pour tracer toutes les actions de chiffrement/déchiffrement
+                <br>
+                • <b>Recherche instantanée</b> dans le coffre-fort pour retrouver rapidement vos clés
+                <br><br>
+                Ce projet professionnel a été développé avec un focus sur la sécurité, l'expérience utilisateur et la qualité du code. Il inclut 19 tests automatisés qui valident tous les aspects de l'application.
+                <br><br>
+                <u>Technologies utilisées:</u> <b>Python, CustomTkinter, Cryptography, Pillow, PyInstaller</b>
+            </p>
+
+            <div style="text-align: center; margin-top: 30px;">
+                <img class="portfolio" src="MbelloEncryption.png">
+
+                <div style="margin-top: 20px;">
+                    <a class="download-button" href="downloads/MBello_Encryption.zip" download>TÉLÉCHARGER L'APPLICATION</a>
+                </div>
+
+                <p style="margin-top: 15px; font-size: 14px; color: #666;">
+                    Version 1.0.0 - Compatible Windows<br>
+                    <i>Fichier ZIP contenant l'application et toutes les ressources nécessaires<br>
+                    Extraire le ZIP et lancer MBello_Encryption.exe - Aucune installation requise</i>
+                </p>
+            </div>
+
+        </div>
+    </div>
+    <!--FRAME-->
+    <iframe src="contact-frame.html" scrolling="no">
+
+    <!-- BOUTON RETOUR EN HAUT -->
+    <a href="#" id="backToTop" title="Retour en haut">↑</a>
+
+    <!-- JAVASCRIPT POUR INTERACTIVITÉ -->
+    <script>
+        // Bouton retour en haut
+        const backToTopButton = document.getElementById('backToTop');
+
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.add('show');
+            } else {
+                backToTopButton.classList.remove('show');
+            }
+        });
+
+        backToTopButton.addEventListener('click', function(e) {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Animation au scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in-up');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.section').forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
