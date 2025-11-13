@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagnostic Système de Commentaires</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+        h1 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+        }
+        .test-section {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        .test-item {
+            padding: 15px;
+            margin: 10px 0;
+            border-left: 4px solid #ddd;
+            background: white;
+            border-radius: 5px;
+        }
+        .test-item.loading {
+            border-left-color: #fbbf24;
+        }
+        .test-item.success {
+            border-left-color: #10b981;
+            background: #f0fdf4;
+        }
+        .test-item.error {
+            border-left-color: #ef4444;
+            background: #fef2f2;
+        }
+        .test-item h3 {
+            margin: 0 0 10px 0;
+            font-size: 16px;
+        }
+        .test-item pre {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-size: 12px;
+            margin: 10px 0 0 0;
+        }
+        button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            margin: 5px;
+        }
+        button:hover {
+            background: #5568d3;
+        }
+        button:disabled {
+            background: #cbd5e1;
+            cursor: not-allowed;
+        }
+        .info-box {
+            background: #dbeafe;
+            border: 1px solid #3b82f6;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .spinner {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔍 Diagnostic Système de Commentaires</h1>
+        <p class="subtitle">Cette page teste la connexion entre votre site et l'API backend Render</p>
+
+        <div class="info-box">
+            <strong>📍 Configuration détectée :</strong><br>
+            <span id="config-info">Chargement...</span>
+        </div>
+
+        <button onclick="runAllTests()">▶️ Lancer tous les tests</button>
+        <button onclick="clearResults()">🗑️ Effacer les résultats</button>
+
+        <div id="results"></div>
+    </div>
+
+    <script>
+        const API_BASE_URL = 'https://mon-portfolio-api.onrender.com/api';
+
+        // Display configuration
+        document.getElementById('config-info').innerHTML = `
+            <strong>URL de l'API :</strong> ${API_BASE_URL}<br>
+            <strong>Origine du site :</strong> ${window.location.origin}<br>
+            <strong>User Agent :</strong> ${navigator.userAgent.substring(0, 100)}...
+        `;
+
+        function addTestResult(title, status, data = null, error = null) {
+            const results = document.getElementById('results');
+            const testItem = document.createElement('div');
+            testItem.className = `test-item ${status}`;
+
+            let content = `<h3>${getStatusIcon(status)} ${title}</h3>`;
+
+            if (status === 'loading') {
+                content += '<div class="spinner"></div> En cours...';
+            } else if (error) {
+                content += `<p style="color: #dc2626; margin: 10px 0;"><strong>Erreur :</strong> ${error}</p>`;
+            }
+
+            if (data) {
+                content += `<pre>${JSON.stringify(data, null, 2)}</pre>`;
+            }
+
+            testItem.innerHTML = content;
+            results.appendChild(testItem);
+            return testItem;
+        }
+
+        function getStatusIcon(status) {
+            switch(status) {
+                case 'loading': return '⏳';
+                case 'success': return '✅';
+                case 'error': return '❌';
+                default: return '⚪';
+            }
+        }
+
+        function clearResults() {
+            document.getElementById('results').innerHTML = '';
+        }
+
+        async function test1_BasicConnectivity() {
+            const testItem = addTestResult('Test 1 : Connectivité réseau basique', 'loading');
+
+            try {
+                const start = Date.now();
+                const response = await fetch(`${API_BASE_URL}/health`);
+                const duration = Date.now() - start;
+                const data = await response.json();
+
+                testItem.className = 'test-item success';
+                testItem.innerHTML = `
+                    <h3>✅ Test 1 : Connectivité réseau basique</h3>
+                    <p><strong>Status :</strong> ${response.status} ${response.statusText}</p>
+                    <p><strong>Temps de réponse :</strong> ${duration}ms</p>
+                    <pre>${JSON.stringify(data, null, 2)}</pre>
+                `;
+            } catch (error) {
+                testItem.className = 'test-item error';
+                testItem.innerHTML = `
+                    <h3>❌ Test 1 : Connectivité réseau basique</h3>
+                    <p style="color: #dc2626;"><strong>Erreur :</strong> ${error.message}</p>
+                    <p style="color: #666; font-size: 14px;">Cela peut indiquer un problème SSL, CORS, ou que le service est en cold start.</p>
+                `;
+            }
+        }
+
+        async function test2_CORSHeaders() {
+            const testItem = addTestResult('Test 2 : Headers CORS', 'loading');
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/health`);
+                const headers = {};
+                response.headers.forEach((value, key) => {
+                    if (key.includes('access-control') || key.includes('origin')) {
+                        headers[key] = value;
+                    }
+                });
+
+                testItem.className = 'test-item success';
+                testItem.innerHTML = `
+                    <h3>✅ Test 2 : Headers CORS</h3>
+                    <pre>${JSON.stringify(headers, null, 2)}</pre>
+                `;
+            } catch (error) {
+                testItem.className = 'test-item error';
+                testItem.innerHTML = `
+                    <h3>❌ Test 2 : Headers CORS</h3>
+                    <p style="color: #dc2626;"><strong>Erreur :</strong> ${error.message}</p>
+                `;
+            }
+        }
+
+        async function test3_GetComments() {
+            const testItem = addTestResult('Test 3 : Récupération des commentaires (Zephyr)', 'loading');
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/comments/zephyr`);
+                const data = await response.json();
+
+                testItem.className = 'test-item success';
+                testItem.innerHTML = `
+                    <h3>✅ Test 3 : Récupération des commentaires</h3>
+                    <p><strong>Nombre de commentaires :</strong> ${data.comments?.length || 0}</p>
+                    <pre>${JSON.stringify(data, null, 2)}</pre>
+                `;
+            } catch (error) {
+                testItem.className = 'test-item error';
+                testItem.innerHTML = `
+                    <h3>❌ Test 3 : Récupération des commentaires</h3>
+                    <p style="color: #dc2626;"><strong>Erreur :</strong> ${error.message}</p>
+                `;
+            }
+        }
+
+        async function test4_PostComment() {
+            const testItem = addTestResult('Test 4 : Envoi d\'un commentaire de test', 'loading');
+
+            try {
+                const testComment = {
+                    project_id: 'zephyr',
+                    author_name: 'Test Diagnostic',
+                    author_email: 'test@diagnostic.com',
+                    comment: 'Ceci est un commentaire de test automatique pour vérifier la connectivité.',
+                    rating: 5
+                };
+
+                const response = await fetch(`${API_BASE_URL}/comments`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(testComment)
+                });
+
+                const data = await response.json();
+
+                testItem.className = 'test-item success';
+                testItem.innerHTML = `
+                    <h3>✅ Test 4 : Envoi d'un commentaire</h3>
+                    <p><strong>Status :</strong> ${response.status} ${response.statusText}</p>
+                    <pre>${JSON.stringify(data, null, 2)}</pre>
+                `;
+            } catch (error) {
+                testItem.className = 'test-item error';
+                testItem.innerHTML = `
+                    <h3>❌ Test 4 : Envoi d'un commentaire</h3>
+                    <p style="color: #dc2626;"><strong>Erreur :</strong> ${error.message}</p>
+                `;
+            }
+        }
+
+        async function test5_GetStats() {
+            const testItem = addTestResult('Test 5 : Récupération des statistiques', 'loading');
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/stats/zephyr`);
+                const data = await response.json();
+
+                testItem.className = 'test-item success';
+                testItem.innerHTML = `
+                    <h3>✅ Test 5 : Statistiques du projet</h3>
+                    <pre>${JSON.stringify(data, null, 2)}</pre>
+                `;
+            } catch (error) {
+                testItem.className = 'test-item error';
+                testItem.innerHTML = `
+                    <h3>❌ Test 5 : Statistiques</h3>
+                    <p style="color: #dc2626;"><strong>Erreur :</strong> ${error.message}</p>
+                `;
+            }
+        }
+
+        async function runAllTests() {
+            clearResults();
+
+            console.log('🧪 Starting diagnostic tests...');
+
+            await test1_BasicConnectivity();
+            await new Promise(resolve => setTimeout(resolve, 500));
+
+            await test2_CORSHeaders();
+            await new Promise(resolve => setTimeout(resolve, 500));
+
+            await test3_GetComments();
+            await new Promise(resolve => setTimeout(resolve, 500));
+
+            await test4_PostComment();
+            await new Promise(resolve => setTimeout(resolve, 500));
+
+            await test5_GetStats();
+
+            console.log('✅ All tests completed');
+        }
+
+        // Run tests automatically on page load
+        window.addEventListener('load', () => {
+            console.log('🔍 Diagnostic page loaded');
+            console.log('API URL:', API_BASE_URL);
+            console.log('Origin:', window.location.origin);
+        });
+    </script>
+</body>
+</html>
