@@ -1,8 +1,6 @@
 const express = require('express');
-const sqlite3 = require('sqlite3').verbose();
 const cors = require('cors');
-const path = require('path');
-const fs = require('fs');
+const { db, initDatabase, USE_POSTGRES } = require('./database');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -19,59 +17,8 @@ app.use(cors({
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Ensure database directory exists
-const dbDir = path.join(__dirname, 'database');
-if (!fs.existsSync(dbDir)) {
-    fs.mkdirSync(dbDir, { recursive: true });
-}
-
-// Database setup
-const db = new sqlite3.Database(path.join(dbDir, 'comments.db'), (err) => {
-    if (err) {
-        console.error('Error connecting to database:', err);
-    } else {
-        console.log('Connected to SQLite database');
-        initDatabase();
-    }
-});
-
-// Initialize database tables
-function initDatabase() {
-    db.run(`
-        CREATE TABLE IF NOT EXISTS comments (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            project_id TEXT NOT NULL,
-            author_name TEXT NOT NULL,
-            author_email TEXT,
-            comment TEXT NOT NULL,
-            rating INTEGER NOT NULL CHECK(rating >= 1 AND rating <= 5),
-            created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-            is_approved INTEGER DEFAULT 1,
-            is_featured INTEGER DEFAULT 0
-        )
-    `, (err) => {
-        if (err) {
-            console.error('Error creating comments table:', err);
-        } else {
-            console.log('Comments table ready');
-        }
-    });
-
-    db.run(`
-        CREATE TABLE IF NOT EXISTS project_stats (
-            project_id TEXT PRIMARY KEY,
-            total_comments INTEGER DEFAULT 0,
-            average_rating REAL DEFAULT 0,
-            total_ratings INTEGER DEFAULT 0
-        )
-    `, (err) => {
-        if (err) {
-            console.error('Error creating project_stats table:', err);
-        } else {
-            console.log('Project stats table ready');
-        }
-    });
-}
+// Initialize database
+initDatabase();
 
 // API Routes
 
