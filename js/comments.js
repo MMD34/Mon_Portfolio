@@ -1,22 +1,59 @@
 /**
- * Comments Management System for Portfolio
- * Handles comment submission, display, and ratings
+ * Comments Management System for Portfolio - OPTIMIZED
+ * Handles comment submission, display, and ratings with graceful degradation
  */
 
-const API_BASE_URL = 'http://localhost:3000/api';
+// Auto-detect environment (local vs production)
+const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+const API_BASE_URL = isLocalhost ? 'http://localhost:3000/api' : null; // Set to your production API URL when ready
 
 class CommentsManager {
     constructor() {
         this.currentProject = null;
+        this.backendAvailable = false;
         this.init();
     }
 
-    init() {
+    async init() {
         // Auto-detect project ID from URL
         this.detectProject();
 
+        // Check if backend is available
+        await this.checkBackendAvailability();
+
         // Initialize event listeners
         this.initEventListeners();
+    }
+
+    async checkBackendAvailability() {
+        if (!API_BASE_URL) {
+            this.backendAvailable = false;
+            console.info('💬 Backend API not configured for production environment');
+            return;
+        }
+
+        try {
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 3000); // 3 second timeout
+
+            const response = await fetch(`${API_BASE_URL}/health`, {
+                method: 'GET',
+                signal: controller.signal
+            });
+
+            clearTimeout(timeoutId);
+
+            if (response.ok) {
+                this.backendAvailable = true;
+                console.info('✅ Backend API is available');
+            } else {
+                this.backendAvailable = false;
+                console.warn('⚠️ Backend API returned non-OK status');
+            }
+        } catch (error) {
+            this.backendAvailable = false;
+            console.info('💬 Comments system running in offline mode (backend not available)');
+        }
     }
 
     detectProject() {
@@ -107,6 +144,14 @@ class CommentsManager {
     async submitComment(e) {
         e.preventDefault();
 
+        if (!this.backendAvailable) {
+            this.showNotification(
+                'Le système de commentaires est actuellement indisponible. Veuillez réessayer plus tard.',
+                'error'
+            );
+            return;
+        }
+
         const form = e.target;
         const submitBtn = form.querySelector('button[type="submit"]');
         const originalText = submitBtn.textContent;
@@ -176,26 +221,51 @@ class CommentsManager {
         const container = document.getElementById('comments-list');
         if (!container) return;
 
+        // Check if backend is available
+        if (!this.backendAvailable) {
+            container.innerHTML = `
+                <div class="text-center py-8">
+                    <div class="bg-gray-50 dark:bg-dark-background-secondary rounded-lg p-8">
+                        <i class="fas fa-info-circle text-4xl mb-4 text-gray-400 dark:text-gray-600"></i>
+                        <p class="text-gray-600 dark:text-gray-400 mb-2">Système de commentaires en cours de configuration</p>
+                        <p class="text-sm text-gray-500 dark:text-gray-500">Les commentaires seront bientôt disponibles !</p>
+                    </div>
+                </div>
+            `;
+            return;
+        }
+
         try {
             const response = await fetch(`${API_BASE_URL}/comments/${this.currentProject}?limit=${limit}&offset=${offset}`);
+
+            if (!response.ok) {
+                throw new Error('Failed to fetch comments');
+            }
+
             const result = await response.json();
 
             if (result.success && result.comments.length > 0) {
                 container.innerHTML = result.comments.map(comment => this.createCommentHTML(comment)).join('');
             } else {
                 container.innerHTML = `
-                    <div class="text-center py-8 text-gray-500 dark:text-gray-400">
-                        <i class="fas fa-comments text-4xl mb-4 opacity-50"></i>
-                        <p>Aucun commentaire pour le moment. Soyez le premier à laisser un avis !</p>
+                    <div class="text-center py-8">
+                        <div class="bg-gradient-to-br from-gray-50 to-white dark:from-dark-background-secondary dark:to-dark-background rounded-lg p-8 border-2 border-dashed border-gray-200 dark:border-gray-700">
+                            <i class="fas fa-comments text-5xl mb-4 text-gray-300 dark:text-gray-600"></i>
+                            <p class="text-xl font-semibold text-gray-700 dark:text-gray-300 mb-2">Aucun commentaire pour le moment</p>
+                            <p class="text-gray-500 dark:text-gray-400">Soyez le premier à partager votre avis sur ce projet !</p>
+                        </div>
                     </div>
                 `;
             }
         } catch (error) {
             console.error('Error loading comments:', error);
             container.innerHTML = `
-                <div class="text-center py-8 text-red-500">
-                    <i class="fas fa-exclamation-triangle text-4xl mb-4"></i>
-                    <p>Erreur lors du chargement des commentaires</p>
+                <div class="text-center py-8">
+                    <div class="bg-red-50 dark:bg-red-900/10 rounded-lg p-8 border border-red-200 dark:border-red-800">
+                        <i class="fas fa-exclamation-triangle text-4xl mb-4 text-red-500"></i>
+                        <p class="text-gray-700 dark:text-gray-300 mb-2">Impossible de charger les commentaires</p>
+                        <p class="text-sm text-gray-500 dark:text-gray-400">Veuillez réessayer plus tard</p>
+                    </div>
                 </div>
             `;
         }
@@ -207,30 +277,56 @@ class CommentsManager {
         const statsContainer = document.getElementById('project-stats');
         if (!statsContainer) return;
 
+        // If backend not available, hide stats section
+        if (!this.backendAvailable) {
+            statsContainer.innerHTML = '';
+            statsContainer.parentElement.style.display = 'none';
+            return;
+        }
+
         try {
             const response = await fetch(`${API_BASE_URL}/stats/${this.currentProject}`);
+
+            if (!response.ok) {
+                throw new Error('Failed to fetch stats');
+            }
+
             const result = await response.json();
 
             if (result.success) {
                 const stats = result.stats;
-                statsContainer.innerHTML = `
-                    <div class="flex items-center gap-6 flex-wrap">
-                        <div class="flex items-center gap-2">
-                            <div class="flex">
-                                ${this.createStarsHTML(stats.average_rating)}
+
+                // Hide section if no comments yet
+                if (stats.total_comments === 0) {
+                    statsContainer.innerHTML = `
+                        <div class="text-center py-4">
+                            <span class="text-gray-500 dark:text-gray-400 text-sm">
+                                <i class="fas fa-star text-yellow-400 mr-2"></i>
+                                Aucune note pour le moment
+                            </span>
+                        </div>
+                    `;
+                } else {
+                    statsContainer.innerHTML = `
+                        <div class="flex items-center gap-6 flex-wrap">
+                            <div class="flex items-center gap-2">
+                                <div class="flex">
+                                    ${this.createStarsHTML(stats.average_rating)}
+                                </div>
+                                <span class="text-lg font-semibold">${stats.average_rating.toFixed(1)}</span>
+                                <span class="text-gray-500 dark:text-gray-400">(${stats.total_ratings} avis)</span>
                             </div>
-                            <span class="text-lg font-semibold">${stats.average_rating.toFixed(1)}</span>
-                            <span class="text-gray-500 dark:text-gray-400">(${stats.total_ratings} avis)</span>
+                            <div class="flex items-center gap-2 text-gray-600 dark:text-gray-400">
+                                <i class="fas fa-comments"></i>
+                                <span>${stats.total_comments} commentaire${stats.total_comments > 1 ? 's' : ''}</span>
+                            </div>
                         </div>
-                        <div class="flex items-center gap-2 text-gray-600 dark:text-gray-400">
-                            <i class="fas fa-comments"></i>
-                            <span>${stats.total_comments} commentaire${stats.total_comments > 1 ? 's' : ''}</span>
-                        </div>
-                    </div>
-                `;
+                    `;
+                }
             }
         } catch (error) {
             console.error('Error loading stats:', error);
+            statsContainer.innerHTML = '';
         }
     }
 
@@ -325,18 +421,50 @@ class FeaturedCommentsCarousel {
         this.comments = [];
         this.currentIndex = 0;
         this.autoScrollInterval = null;
+        this.backendAvailable = false;
         this.init();
     }
 
     async init() {
+        await this.checkBackendAvailability();
         await this.loadFeaturedComments();
+
         if (this.comments.length > 0) {
             this.renderCarousel();
             this.startAutoScroll();
+        } else {
+            this.renderEmptyState();
+        }
+    }
+
+    async checkBackendAvailability() {
+        if (!API_BASE_URL) {
+            this.backendAvailable = false;
+            return;
+        }
+
+        try {
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 3000);
+
+            const response = await fetch(`${API_BASE_URL}/health`, {
+                method: 'GET',
+                signal: controller.signal
+            });
+
+            clearTimeout(timeoutId);
+            this.backendAvailable = response.ok;
+        } catch (error) {
+            this.backendAvailable = false;
         }
     }
 
     async loadFeaturedComments() {
+        if (!this.backendAvailable) {
+            console.info('💬 Featured comments not loaded (backend unavailable)');
+            return;
+        }
+
         try {
             const response = await fetch(`${API_BASE_URL}/comments/featured/all?limit=20`);
             const result = await response.json();
@@ -347,6 +475,21 @@ class FeaturedCommentsCarousel {
         } catch (error) {
             console.error('Error loading featured comments:', error);
         }
+    }
+
+    renderEmptyState() {
+        const container = document.getElementById('featured-comments-carousel');
+        if (!container) return;
+
+        container.innerHTML = `
+            <div class="text-center py-16">
+                <div class="max-w-md mx-auto bg-gradient-to-br from-gray-50 to-white dark:from-dark-background-secondary dark:to-dark-background rounded-lg p-8 border-2 border-dashed border-gray-200 dark:border-gray-700">
+                    <i class="fas fa-star text-6xl mb-4 text-gray-300 dark:text-gray-600"></i>
+                    <p class="text-xl font-semibold text-gray-700 dark:text-gray-300 mb-2">Bientôt des témoignages !</p>
+                    <p class="text-gray-500 dark:text-gray-400">Les premiers avis de nos utilisateurs apparaîtront ici</p>
+                </div>
+            </div>
+        `;
     }
 
     renderCarousel() {
