@@ -529,6 +529,39 @@
         </div>
     </section>
 
+    <!-- Featured Comments Carousel -->
+    <section id="featured-comments-section" class="py-24 bg-gradient-to-br from-gray-50 to-white dark:from-dark-background-secondary dark:to-dark-background translate-y-4 transition-all duration-500 opacity-0">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">
+                    <i class="fas fa-star text-yellow-400 mr-3"></i>
+                    Ce qu'ils pensent de mes projets
+                </h2>
+                <p class="text-xl text-gray-600 dark:text-gray-400">
+                    Découvrez les avis de ceux qui ont testé mes applications
+                </p>
+            </div>
+
+            <div class="max-w-4xl mx-auto">
+                <div id="featured-comments-carousel">
+                    <div class="flex justify-center py-16">
+                        <div class="text-center">
+                            <div class="loading-spinner mx-auto mb-4"></div>
+                            <p class="text-gray-500 dark:text-gray-400">Chargement des commentaires...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-12">
+                <a href="#projects" class="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary/90 transition-all duration-300 transform hover:-translate-y-1 shadow-lg hover:shadow-xl">
+                    <i class="fas fa-eye"></i>
+                    <span>Voir tous les projets</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
     <!-- Contact Section -->
     <section id="contact"
         class="py-24 bg-gray-50 dark:bg-dark-background-secondary translate-y-4 transition-all duration-500 opacity-0">
@@ -656,6 +689,10 @@
             </div>
         </div>
     </footer>
+
+    <!-- Comments System -->
+    <link rel="stylesheet" href="css/comments.css">
+    <script src="js/comments.js"></script>
 
     <script src="script.js"></script>
 </body>

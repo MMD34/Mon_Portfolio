@@ -246,6 +246,105 @@
         </div>
     </section>
 
+
+    <!-- Project Statistics -->
+    <section class="py-8 bg-gray-50 dark:bg-dark-background-secondary">
+        <div class="container mx-auto px-4">
+            <div id="project-stats" class="flex items-center justify-center">
+                <div class="loading-spinner"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Comments Section -->
+    <section id="comments-section" class="py-16 bg-white dark:bg-dark-background">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">
+                    <i class="fas fa-comments text-primary mr-3"></i>
+                    Avis et Commentaires
+                </h2>
+
+                <!-- Comment Form -->
+                <div class="bg-white dark:bg-dark-background rounded-2xl shadow-xl p-8 mb-12 border border-gray-100 dark:border-gray-800">
+                    <h3 class="text-2xl font-semibold mb-6 flex items-center gap-3">
+                        <i class="fas fa-pen text-primary"></i>
+                        Laissez votre avis
+                    </h3>
+
+                    <form id="comment-form" class="space-y-6">
+                        <!-- Name Input -->
+                        <div>
+                            <label for="author-name" class="block text-sm font-medium mb-2">
+                                Nom <span class="text-red-500">*</span>
+                            </label>
+                            <input type="text" id="author-name" name="author-name" required placeholder="Votre nom"
+                                class="comment-form-input w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-dark-background-secondary text-gray-900 dark:text-white focus:outline-none focus:border-primary"/>
+                        </div>
+
+                        <!-- Email Input -->
+                        <div>
+                            <label for="author-email" class="block text-sm font-medium mb-2">
+                                Email <span class="text-gray-400 text-xs">(optionnel)</span>
+                            </label>
+                            <input type="email" id="author-email" name="author-email" placeholder="votre.email@exemple.com"
+                                class="comment-form-input w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-dark-background-secondary text-gray-900 dark:text-white focus:outline-none focus:border-primary"/>
+                        </div>
+
+                        <!-- Star Rating -->
+                        <div>
+                            <label class="block text-sm font-medium mb-3">
+                                Note <span class="text-red-500">*</span>
+                            </label>
+                            <div id="star-rating" class="flex gap-2">
+                                <i class="star fas fa-star text-gray-300 dark:text-gray-600" data-rating="1"></i>
+                                <i class="star fas fa-star text-gray-300 dark:text-gray-600" data-rating="2"></i>
+                                <i class="star fas fa-star text-gray-300 dark:text-gray-600" data-rating="3"></i>
+                                <i class="star fas fa-star text-gray-300 dark:text-gray-600" data-rating="4"></i>
+                                <i class="star fas fa-star text-gray-300 dark:text-gray-600" data-rating="5"></i>
+                            </div>
+                            <input type="hidden" id="rating-value" name="rating" required />
+                        </div>
+
+                        <!-- Comment Text -->
+                        <div>
+                            <label for="comment-text" class="block text-sm font-medium mb-2">
+                                Votre commentaire <span class="text-red-500">*</span>
+                            </label>
+                            <textarea id="comment-text" name="comment" required rows="5" minlength="10"
+                                placeholder="Partagez votre expérience avec ce projet... (minimum 10 caractères)"
+                                class="comment-form-input w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-dark-background-secondary text-gray-900 dark:text-white focus:outline-none focus:border-primary resize-none"></textarea>
+                            <p class="text-xs text-gray-500 dark:text-gray-400 mt-2">
+                                <i class="fas fa-info-circle mr-1"></i>
+                                Minimum 10 caractères requis
+                            </p>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <button type="submit"
+                            class="w-full px-8 py-4 bg-gradient-to-r from-primary to-secondary text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-300">
+                            <i class="fas fa-paper-plane mr-2"></i>
+                            Publier mon commentaire
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Comments List -->
+                <div>
+                    <h3 class="text-2xl font-semibold mb-6 flex items-center gap-3">
+                        <i class="fas fa-message text-primary"></i>
+                        Commentaires des utilisateurs
+                    </h3>
+                    <div id="comments-list" class="space-y-6">
+                        <div class="flex justify-center py-8">
+                            <div class="loading-spinner"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Back to Top Button -->
     <a href="#" id="backToTop"
         class="fixed bottom-8 right-8 w-12 h-12 bg-primary text-white rounded-full flex items-center justify-center shadow-lg hover:bg-primary/90 transition-all duration-300 opacity-0 pointer-events-none">
@@ -272,6 +371,11 @@
             </div>
         </div>
     </footer>
+
+
+    <!-- Comments System -->
+    <link rel="stylesheet" href="css/comments.css">
+    <script src="js/comments.js"></script>
 
     <script src="script.js"></script>
 </body>
