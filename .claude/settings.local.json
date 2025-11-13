@@ -15,7 +15,9 @@
       "Bash(npx postcss:*)",
       "Bash(copy \"MbelloEncryption.png\" \"project4.jpg\")",
       "Bash(copy \"MbelloEncryption.png\" \"project4small.jpg\")",
-      "Bash(npm install)"
+      "Bash(npm install)",
+      "Bash(node integrate-comments.js:*)",
+      "Bash(del:*)"
     ],
     "deny": [],
     "ask": []
