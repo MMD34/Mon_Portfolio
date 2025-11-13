@@ -71,3 +71,9 @@ Downloads/
 !public/downloads/MBello_Encryption.zip
 !project4.jpg
 !project4small.jpg
+
+# Comments System Database
+server/database/*.db
+server/database/*.db-journal
+server/database/*.db-shm
+server/database/*.db-wal

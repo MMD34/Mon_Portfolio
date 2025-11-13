@@ -1,0 +1,119 @@
+<!-- Comments Section Component for HTML/CSS Version -->
+<!-- Insert this component in project detail pages -->
+
+<!-- Project Statistics -->
+<section style="padding: 2rem 0; background: #f9fafb;">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 0 1rem;">
+        <div id="project-stats">
+            <!-- Stats will be dynamically loaded here -->
+            <div class="loading-spinner"></div>
+        </div>
+    </div>
+</section>
+
+<!-- Comments Section -->
+<section id="comments-section">
+    <div class="comments-container">
+        <h2 class="comments-list-header">
+            <i class="fas fa-comments"></i>
+            Avis et Commentaires
+        </h2>
+
+        <!-- Comment Form -->
+        <div class="comment-form-container">
+            <h3>
+                <i class="fas fa-pen"></i>
+                Laissez votre avis
+            </h3>
+
+            <form id="comment-form">
+                <!-- Name Input -->
+                <div class="form-field">
+                    <label for="author-name">
+                        Nom <span class="required">*</span>
+                    </label>
+                    <input
+                        type="text"
+                        id="author-name"
+                        name="author-name"
+                        required
+                        placeholder="Votre nom"
+                        class="comment-form-input"
+                    />
+                </div>
+
+                <!-- Email Input (Optional) -->
+                <div class="form-field">
+                    <label for="author-email">
+                        Email <span style="color: #9ca3af; font-size: 0.75rem;">(optionnel)</span>
+                    </label>
+                    <input
+                        type="email"
+                        id="author-email"
+                        name="author-email"
+                        placeholder="votre.email@exemple.com"
+                        class="comment-form-input"
+                    />
+                </div>
+
+                <!-- Star Rating -->
+                <div class="form-field">
+                    <label>
+                        Note <span class="required">*</span>
+                    </label>
+                    <div id="star-rating">
+                        <i class="star fas fa-star" data-rating="1"></i>
+                        <i class="star fas fa-star" data-rating="2"></i>
+                        <i class="star fas fa-star" data-rating="3"></i>
+                        <i class="star fas fa-star" data-rating="4"></i>
+                        <i class="star fas fa-star" data-rating="5"></i>
+                    </div>
+                    <input type="hidden" id="rating-value" name="rating" required />
+                </div>
+
+                <!-- Comment Text -->
+                <div class="form-field">
+                    <label for="comment-text">
+                        Votre commentaire <span class="required">*</span>
+                    </label>
+                    <textarea
+                        id="comment-text"
+                        name="comment"
+                        required
+                        minlength="10"
+                        placeholder="Partagez votre expérience avec ce projet... (minimum 10 caractères)"
+                        class="comment-form-input"
+                    ></textarea>
+                    <p style="font-size: 0.75rem; color: #6b7280; margin-top: 0.5rem;">
+                        <i class="fas fa-info-circle"></i>
+                        Minimum 10 caractères requis
+                    </p>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="submit-btn">
+                    <i class="fas fa-paper-plane"></i>
+                    Publier mon commentaire
+                </button>
+            </form>
+        </div>
+
+        <!-- Comments List -->
+        <div>
+            <h3 class="comments-list-header">
+                <i class="fas fa-message"></i>
+                Commentaires des utilisateurs
+            </h3>
+            <div id="comments-list">
+                <!-- Comments will be dynamically loaded here -->
+                <div style="display: flex; justify-content: center; padding: 2rem;">
+                    <div class="loading-spinner"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Required Scripts and Styles -->
+<link rel="stylesheet" href="css/comments.css">
+<script src="js/comments.js"></script>
