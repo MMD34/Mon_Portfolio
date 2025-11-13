@@ -32,9 +32,11 @@ class CommentsManager {
             return;
         }
 
+        console.log('🔍 Checking backend availability at:', API_BASE_URL);
+
         try {
             const controller = new AbortController();
-            const timeoutId = setTimeout(() => controller.abort(), 3000); // 3 second timeout
+            const timeoutId = setTimeout(() => controller.abort(), 15000); // 15 second timeout for cold starts
 
             const response = await fetch(`${API_BASE_URL}/health`, {
                 method: 'GET',
@@ -48,10 +50,11 @@ class CommentsManager {
                 console.info('✅ Backend API is available');
             } else {
                 this.backendAvailable = false;
-                console.warn('⚠️ Backend API returned non-OK status');
+                console.warn('⚠️ Backend API returned non-OK status:', response.status);
             }
         } catch (error) {
             this.backendAvailable = false;
+            console.error('❌ Backend API check failed:', error.message);
             console.info('💬 Comments system running in offline mode (backend not available)');
         }
     }
