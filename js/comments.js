@@ -5,7 +5,7 @@
 
 // Auto-detect environment (local vs production)
 const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
-const API_BASE_URL = isLocalhost ? 'http://localhost:3000/api' : null; // Set to your production API URL when ready
+const API_BASE_URL = isLocalhost ? 'http://localhost:3000/api' : 'https://mon-portfolio-api.onrender.com/api';
 
 class CommentsManager {
     constructor() {
