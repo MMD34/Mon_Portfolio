@@ -17,7 +17,8 @@
       "Bash(copy \"MbelloEncryption.png\" \"project4small.jpg\")",
       "Bash(npm install)",
       "Bash(node integrate-comments.js:*)",
-      "Bash(del:*)"
+      "Bash(del:*)",
+      "Bash(git fetch:*)"
     ],
     "deny": [],
     "ask": []
