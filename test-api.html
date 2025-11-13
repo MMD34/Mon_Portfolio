@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test API Commentaires</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 { color: #D89584; }
+        button {
+            background: #D89584;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px 5px;
+        }
+        button:hover { background: #c57d6a; }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f9f9f9;
+            border-left: 4px solid #D89584;
+            border-radius: 4px;
+        }
+        .success { border-left-color: #10b981; background: #f0fdf4; }
+        .error { border-left-color: #ef4444; background: #fef2f2; }
+        pre {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧪 Test API Commentaires - Render</h1>
+        <p>URL de l'API : <strong>https://mon-portfolio-api.onrender.com/api</strong></p>
+
+        <h2>Tests disponibles :</h2>
+
+        <button onclick="testHealth()">1. Test Health</button>
+        <button onclick="testAddComment()">2. Ajouter un commentaire</button>
+        <button onclick="testGetComments()">3. Récupérer les commentaires</button>
+        <button onclick="testGetStats()">4. Voir les statistiques</button>
+        <button onclick="addSampleData()">5. Ajouter des données d'exemple</button>
+
+        <div id="result"></div>
+    </div>
+
+    <script>
+        const API_URL = 'https://mon-portfolio-api.onrender.com/api';
+
+        function showResult(title, data, isError = false) {
+            const result = document.getElementById('result');
+            result.className = 'result ' + (isError ? 'error' : 'success');
+            result.innerHTML = `
+                <h3>${title}</h3>
+                <pre>${JSON.stringify(data, null, 2)}</pre>
+            `;
+        }
+
+        async function testHealth() {
+            try {
+                const response = await fetch(`${API_URL}/health`);
+                const data = await response.json();
+                showResult('✅ Health Check', data);
+            } catch (error) {
+                showResult('❌ Erreur Health Check', { error: error.message }, true);
+            }
+        }
+
+        async function testAddComment() {
+            const comment = {
+                project_id: 'zephyr',
+                author_name: 'Test User',
+                author_email: 'test@example.com',
+                comment: 'Ceci est un commentaire de test depuis l\'interface de test !',
+                rating: 5
+            };
+
+            try {
+                const response = await fetch(`${API_URL}/comments`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(comment)
+                });
+                const data = await response.json();
+                showResult('✅ Commentaire ajouté', data);
+            } catch (error) {
+                showResult('❌ Erreur ajout commentaire', { error: error.message }, true);
+            }
+        }
+
+        async function testGetComments() {
+            try {
+                const response = await fetch(`${API_URL}/comments/zephyr`);
+                const data = await response.json();
+                showResult('✅ Commentaires récupérés', data);
+            } catch (error) {
+                showResult('❌ Erreur récupération', { error: error.message }, true);
+            }
+        }
+
+        async function testGetStats() {
+            try {
+                const response = await fetch(`${API_URL}/stats/zephyr`);
+                const data = await response.json();
+                showResult('✅ Statistiques', data);
+            } catch (error) {
+                showResult('❌ Erreur statistiques', { error: error.message }, true);
+            }
+        }
+
+        async function addSampleData() {
+            const samples = [
+                {
+                    project_id: 'zephyr',
+                    author_name: 'Marie Dubois',
+                    comment: 'Excellent gestionnaire de mots de passe ! Interface intuitive et très sécurisé.',
+                    rating: 5
+                },
+                {
+                    project_id: 'encryption',
+                    author_name: 'Pierre Martin',
+                    comment: 'Application de chiffrement très complète, j\'adore les multiples algorithmes disponibles.',
+                    rating: 5
+                },
+                {
+                    project_id: 'zephyr',
+                    author_name: 'Sophie Laurent',
+                    comment: 'Parfait pour gérer mes mots de passe en toute sécurité. Le générateur de mots de passe est top !',
+                    rating: 4
+                }
+            ];
+
+            let results = [];
+            for (const sample of samples) {
+                try {
+                    const response = await fetch(`${API_URL}/comments`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(sample)
+                    });
+                    const data = await response.json();
+                    results.push({ success: true, data });
+                } catch (error) {
+                    results.push({ success: false, error: error.message });
+                }
+            }
+            showResult('✅ Données d\'exemple ajoutées', results);
+        }
+
+        // Test automatique au chargement
+        window.onload = () => {
+            console.log('🧪 Page de test chargée');
+            console.log('API URL:', API_URL);
+        };
+    </script>
+</body>
+</html>
