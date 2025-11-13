@@ -14,7 +14,8 @@
       "Bash(dir:*)",
       "Bash(npx postcss:*)",
       "Bash(copy \"MbelloEncryption.png\" \"project4.jpg\")",
-      "Bash(copy \"MbelloEncryption.png\" \"project4small.jpg\")"
+      "Bash(copy \"MbelloEncryption.png\" \"project4small.jpg\")",
+      "Bash(npm install)"
     ],
     "deny": [],
     "ask": []
