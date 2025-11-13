@@ -241,6 +241,45 @@ app.get('/api/stats', (req, res) => {
     });
 });
 
+// Toggle featured status for a comment
+app.patch('/api/comments/:id/feature', (req, res) => {
+    const { id } = req.params;
+    const { featured } = req.body;
+
+    // If featured is not provided, toggle the current value
+    if (featured === undefined) {
+        db.get('SELECT is_featured FROM comments WHERE id = ?', [id], (err, row) => {
+            if (err) {
+                console.error('Error fetching comment:', err);
+                return res.status(500).json({ success: false, error: 'Failed to fetch comment' });
+            }
+            if (!row) {
+                return res.status(404).json({ success: false, error: 'Comment not found' });
+            }
+
+            const newFeaturedValue = row.is_featured === 1 ? 0 : 1;
+            updateFeaturedStatus(id, newFeaturedValue, res);
+        });
+    } else {
+        updateFeaturedStatus(id, featured ? 1 : 0, res);
+    }
+});
+
+function updateFeaturedStatus(id, featuredValue, res) {
+    db.run('UPDATE comments SET is_featured = ? WHERE id = ?', [featuredValue, id], function(err) {
+        if (err) {
+            console.error('Error updating featured status:', err);
+            res.status(500).json({ success: false, error: 'Failed to update featured status' });
+        } else {
+            res.json({
+                success: true,
+                message: `Comment ${featuredValue === 1 ? 'marked as featured' : 'unmarked as featured'}`,
+                is_featured: featuredValue
+            });
+        }
+    });
+}
+
 // Health check endpoint
 app.get('/api/health', (req, res) => {
     res.json({ status: 'OK', message: 'Server is running' });
@@ -256,12 +295,13 @@ app.use((err, req, res, next) => {
 app.listen(PORT, () => {
     console.log(`\n🚀 Comments API Server running on port ${PORT}`);
     console.log(`📊 API Endpoints:`);
-    console.log(`   - GET  /api/comments/:projectId - Get comments for a project`);
-    console.log(`   - GET  /api/comments/featured/all - Get featured comments`);
-    console.log(`   - GET  /api/stats/:projectId - Get project statistics`);
-    console.log(`   - GET  /api/stats - Get all projects statistics`);
-    console.log(`   - POST /api/comments - Add a new comment`);
-    console.log(`   - GET  /api/health - Health check\n`);
+    console.log(`   - GET   /api/comments/:projectId - Get comments for a project`);
+    console.log(`   - GET   /api/comments/featured/all - Get featured comments`);
+    console.log(`   - GET   /api/stats/:projectId - Get project statistics`);
+    console.log(`   - GET   /api/stats - Get all projects statistics`);
+    console.log(`   - POST  /api/comments - Add a new comment`);
+    console.log(`   - PATCH /api/comments/:id/feature - Toggle featured status`);
+    console.log(`   - GET   /api/health - Health check\n`);
 });
 
 // Graceful shutdown
