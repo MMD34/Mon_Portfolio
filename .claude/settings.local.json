@@ -18,7 +18,8 @@
       "Bash(npm install)",
       "Bash(node integrate-comments.js:*)",
       "Bash(del:*)",
-      "Bash(git fetch:*)"
+      "Bash(git fetch:*)",
+      "Bash(curl:*)"
     ],
     "deny": [],
     "ask": []
