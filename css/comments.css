@@ -1,0 +1,183 @@
+/* Comments System Styles for Tailwind Version */
+
+/* Star Rating Interactive Styles */
+.star {
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 1.5rem;
+}
+
+.star:hover {
+    transform: scale(1.2);
+}
+
+.star.active {
+    animation: starPulse 0.3s ease;
+}
+
+@keyframes starPulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.3);
+    }
+}
+
+/* Comment Form Styles */
+.comment-form-input {
+    transition: all 0.3s ease;
+}
+
+.comment-form-input:focus {
+    box-shadow: 0 0 0 3px rgba(216, 149, 132, 0.1);
+}
+
+/* Carousel Animations */
+.carousel-track {
+    display: flex;
+}
+
+.carousel-item {
+    transition: opacity 0.5s ease;
+}
+
+.carousel-btn {
+    transition: all 0.3s ease;
+}
+
+.carousel-btn:hover {
+    transform: translateY(-50%) scale(1.1);
+}
+
+.carousel-btn:active {
+    transform: translateY(-50%) scale(0.95);
+}
+
+/* Featured Comments Section */
+#featured-comments-section {
+    background: linear-gradient(135deg, rgba(216, 149, 132, 0.05) 0%, rgba(121, 40, 202, 0.05) 100%);
+}
+
+/* Comment Cards Hover Effects */
+.comment-card {
+    transition: all 0.3s ease;
+}
+
+.comment-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+}
+
+/* Rating Display */
+.rating-display {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+/* Responsive Carousel */
+@media (max-width: 768px) {
+    .carousel-btn {
+        padding: 0.5rem;
+    }
+
+    .star {
+        font-size: 1.25rem;
+    }
+}
+
+/* Loading Animation */
+.loading-spinner {
+    border: 3px solid rgba(216, 149, 132, 0.1);
+    border-top-color: #D89584;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Notification Styles */
+.notification-enter {
+    animation: slideIn 0.3s ease;
+}
+
+.notification-exit {
+    animation: slideOut 0.3s ease;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideOut {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}
+
+/* Comment Stats Badge */
+.stats-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    background: linear-gradient(135deg, rgba(216, 149, 132, 0.1) 0%, rgba(121, 40, 202, 0.1) 100%);
+    border-radius: 999px;
+    font-weight: 600;
+}
+
+/* Dark Mode Adjustments */
+.dark .comment-form-input:focus {
+    box-shadow: 0 0 0 3px rgba(216, 149, 132, 0.2);
+}
+
+.dark .comment-card {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+}
+
+/* Featured Badge Animation */
+.featured-badge {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.7;
+    }
+}
+
+/* Smooth Scroll for Comments Section */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Empty State Illustration */
+.empty-state {
+    opacity: 0.6;
+    transition: opacity 0.3s ease;
+}
+
+.empty-state:hover {
+    opacity: 0.8;
+}
